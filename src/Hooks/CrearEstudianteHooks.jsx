@@ -11,14 +11,16 @@ export default function CrearEstudianteHooks() {
   const [form, setForm] = useState({
     nombre: "",
     apellido: "",
-    cursos: [],
+    cursos: "",
   });
 
   useEffect(() => {
     fetch("http://localhost:1234/cursos")
       .then((resp) => resp.json())
       .then((json) => {
-        setCursos({ cursos: json.cursos });
+        setCursos({
+          cursos: json.cursos,
+        });
       });
   }, []);
 
@@ -30,7 +32,10 @@ export default function CrearEstudianteHooks() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setForm({ ...form, [name]: [value] });
+    setForm({
+      ...form,
+      [name]: value,
+    });
   }
 
   function handleSubmit(e) {
@@ -41,7 +46,7 @@ export default function CrearEstudianteHooks() {
       body: JSON.stringify({
         nombre: form.nombre,
         apellido: form.apellido,
-        cursos: form.cursos,
+        cursos: [form.cursos],
       }),
     })
       .then((resp) => resp.json())

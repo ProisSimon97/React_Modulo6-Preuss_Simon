@@ -16,7 +16,7 @@ export default class Body extends Component {
       <Container fluid className="body">
         {this.props.item === 0 && <Bienvenido />}
         {this.props.item === 1 && <CrearEstudiante />}
-        {/*         {this.props.item === 1 && <CrearEstudianteHooks />} */}
+        {/* {this.props.item === 1 && <CrearEstudianteHooks />} */}
         {this.props.item === 2 && (
           <Estudiantes apellido={this.props.apellido} />
         )}

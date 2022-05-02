@@ -16,7 +16,6 @@ export default class Estudiantes extends Component {
       estudiantes: [],
       cursos: [],
       curso: "",
-      ultimoModificado: {},
       resultado: "",
     };
   }
@@ -62,17 +61,22 @@ export default class Estudiantes extends Component {
 
   handleSubmit(e) {
     let est = this.state.estudiantes[0];
-
     let cur = { nombre: this.state.curso };
 
     est.cursos = [...est.cursos, cur];
+
+    let cursos = [];
+
+    est.cursos.map((r) => {
+      return cursos.push(r.nombre);
+    });
 
     fetch("http://localhost:1234/estudiantes?apellido=" + this.props.apellido, {
       method: "POST",
       body: JSON.stringify({
         nombre: est.nombre,
         apellido: est.apellido,
-        cursos: est.cursos,
+        cursos: cursos,
       }),
     })
       .then((resp) => resp.json())
